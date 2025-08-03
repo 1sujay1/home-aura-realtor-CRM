@@ -29,19 +29,11 @@ const adminOptions = {
           name: "CRM Data", // 👈 Custom group name shown in sidebar
           icon: "User", // 👈 Optional icon from AdminJS icons
         },
-        listProperties: [
-          "name",
-          "email",
-          "phone",
-          "status",
-          "visitDate",
-          "message",
-        ],
+        listProperties: ["name", "email", "phone", "status", "visitDate"],
         editProperties: [
           "name",
           "email",
           "phone",
-          "message",
           "status",
           "visitDate",
           "notes",
@@ -51,7 +43,6 @@ const adminOptions = {
           "name",
           "email",
           "phone",
-          "message",
           "status",
           "visitDate",
           "notes",
