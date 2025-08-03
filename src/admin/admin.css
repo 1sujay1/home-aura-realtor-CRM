@@ -1,0 +1,4 @@
+/* admin/admin.css */
+section[data-css="sidebar-footer"] {
+  display: none !important;
+}
