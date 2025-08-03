@@ -82,8 +82,9 @@ const Login = () => {
           <H2>Welcome to Home Aura Realtor</H2>
           <Text mt="lg" lineHeight="lg">
             Discover a smarter way to manage your real estate business. Home
-            Aura CRM brings together property listings, leads, and builder
-            connections — all in one unified platform for channel partners.
+            Aura Realtor CRM brings together property listings, leads, and
+            builder connections — all in one unified platform for channel
+            partners.
           </Text>
           <Illustration variant="Rocket" width={240} mt="xl" mx={["auto", 0]} />
         </Box>
