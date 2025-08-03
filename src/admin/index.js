@@ -15,6 +15,10 @@ const componentLoader = new ComponentLoader();
 const Components = {
   Dashboard: componentLoader.add("Dashboard", "./components/Dashboard"),
   Login: componentLoader.override("Login", "./components/Login"),
+  ExcelUploadComponent: componentLoader.add(
+    "ExcelUploadComponent",
+    "./components/ExcelUploadComponent"
+  ),
   // other custom components
 };
 
@@ -50,6 +54,15 @@ const adminOptions = {
         sort: {
           sortBy: "visitDate",
           direction: "desc",
+        },
+        actions: {
+          importExcel: {
+            label: "Import from Excel",
+            icon: "Upload",
+            actionType: "resource",
+            component: Components.ExcelUploadComponent,
+            isVisible: true,
+          },
         },
       },
     },

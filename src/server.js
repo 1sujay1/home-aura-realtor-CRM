@@ -5,6 +5,7 @@ import admin from "./admin/index.js";
 import { buildAdminRouter } from "./admin/router.js";
 import dotenv from "dotenv";
 import { bundle } from "@adminjs/bundler";
+import adminRoutes from "./admin/admin.router.js";
 
 dotenv.config();
 
@@ -26,6 +27,9 @@ const start = async () => {
   app.get("/dashboard", (req, res) => {
     res.send("Customer Dashboard - CRM features coming soon!");
   });
+
+  // Routes
+  app.use("/admin-actions", adminRoutes);
 
   const PORT = process.env.PORT || 3000;
   const BACKEND_URL = process.env.BACKEND_URL || `http://localhost:${PORT}`;

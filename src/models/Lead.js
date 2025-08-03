@@ -20,7 +20,7 @@ const LeadSchema = new mongoose.Schema(
         "Closed - Won",
         "Closed - Lost",
       ],
-      default: "New",
+      default: "New / Fresh Lead",
     },
     notes: { type: String },
     visitDate: { type: Date },
