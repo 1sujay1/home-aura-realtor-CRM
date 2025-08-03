@@ -1,0 +1,39 @@
+name: Deploy CRM App to VPS
+
+on:
+  push:
+    branches:
+      - main
+
+  workflow_dispatch:
+    inputs:
+      deploy_branch:
+        description: "Branch to deploy"
+        required: true
+        default: "main"
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up SSH key
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Deploy via SSH
+        env:
+          BRANCH: ${{ github.event.inputs.deploy_branch || 'main' }}
+        run: |
+          ssh -o StrictHostKeyChecking=no root@31.97.61.58 << EOF
+            cd home-aura-realtor-CRM
+            git fetch origin &&
+            git checkout $BRANCH &&
+            git pull origin $BRANCH &&
+            yarn install &&
+            pm2 restart realtor-crm
+          EOF
