@@ -9,7 +9,17 @@ const LeadSchema = new mongoose.Schema(
     message: { type: String },
     status: {
       type: String,
-      enum: ["New", "Contacted", "Visited", "Purchased", "Cancelled"],
+      enum: [
+        "New / Fresh Lead",
+        "Contacted / Attempted to Contact",
+        "Interested / Warm Lead",
+        "Not Interested",
+        "Follow-Up Scheduled",
+        "Site Visit Scheduled / Done",
+        "Negotiation / Booking in Progress",
+        "Closed - Won",
+        "Closed - Lost",
+      ],
       default: "New",
     },
     notes: { type: String },
