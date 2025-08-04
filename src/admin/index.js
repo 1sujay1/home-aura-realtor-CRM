@@ -1,5 +1,5 @@
 // Generates AdminJS config & resources
-import AdminJS, { ComponentLoader, Login } from "adminjs";
+import AdminJS, { ComponentLoader } from "adminjs";
 import * as AdminJSMongoose from "@adminjs/mongoose";
 import Lead from "../models/Lead.js";
 import { fileURLToPath } from "url";
@@ -18,6 +18,10 @@ const Components = {
   ExcelUploadComponent: componentLoader.add(
     "ExcelUploadComponent",
     "./components/ExcelUploadComponent"
+  ),
+  ExportExcelDownload: componentLoader.add(
+    "ExportExcelDownload",
+    "./components/ExportExcelDownload"
   ),
   // other custom components
 };
@@ -79,6 +83,70 @@ const adminOptions = {
             component: Components.ExcelUploadComponent,
             isVisible: true,
           },
+          exportLeads: {
+            actionType: "resource",
+            icon: "Download",
+            label: "Export to Excel",
+            showInDrawer: true,
+            component: Components.ExportExcelDownload, // frontend component will be added later
+            isVisible: true,
+            // handler: async (request, response, context) => {
+            //   // console.log("request:", request);
+            //   // console.log("context:", context);
+            //   console.log("request.query:", request.query);
+            //   console.log("request.params:", request.params);
+            //   console.log("request.body:", request.body);
+            //   const filter = request?.query?.filters || {};
+            //   console.log("🔎 Received Filters:", filter);
+
+            //   const query = {};
+
+            //   // Apply filters dynamically
+            //   if (filter.name) query.name = filter.name;
+            //   if (filter.email) query.email = filter.email;
+            //   if (filter.status) query.status = filter.status;
+            //   const leads = await Lead.find(query).lean();
+
+            //   const formatted = leads.map((lead) => ({
+            //     Name: lead.name,
+            //     Email: lead.email,
+            //     Phone: lead.phone,
+            //     Status: lead.status,
+            //     CreatedAt: lead.createdAt?.toISOString()?.split("T")[0],
+            //   }));
+
+            //   const sheet = XLSX.utils.json_to_sheet(formatted);
+            //   const workbook = XLSX.utils.book_new();
+            //   XLSX.utils.book_append_sheet(workbook, sheet, "Leads");
+
+            //   const buffer = XLSX.write(workbook, {
+            //     bookType: "xlsx",
+            //     type: "buffer",
+            //   });
+            //   const base64 = buffer.toString("base64");
+
+            //   return {
+            //     data: {
+            //       base64,
+            //       filename: "leads.xlsx",
+            //     },
+            //   };
+            // },
+          },
+
+          // myCustomAction: {
+          //   actionType: "record",
+          //   isVisible: true,
+          //   icon: "Download",
+          //   component: false, // see "Writing your own Components"
+          //   handler: (request, response, context) => {
+          //     const { record, currentAdmin } = context;
+          //     return {
+          //       record: record.toJSON(currentAdmin),
+          //     };
+          //   },
+          //   showInDrawer: true,
+          // },
         },
       },
     },
