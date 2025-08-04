@@ -7,6 +7,7 @@ const LeadSchema = new mongoose.Schema(
     email: String,
     phone: String,
     message: { type: String },
+    project: { type: String },
     status: {
       type: String,
       enum: [
