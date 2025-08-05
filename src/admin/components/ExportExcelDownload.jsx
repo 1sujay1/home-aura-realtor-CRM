@@ -29,7 +29,9 @@ const ExportExcelDownload = () => {
           Email: r.params.email,
           Phone: r.params.phone,
           Status: r.params.status,
+          Source: r.params.source,
           Notes: r.params.notes,
+          Message: r.params.message,
           Project: r.params.project,
           CreatedAt: r.params.createdAt?.split("T")[0],
           VisitDate: r.params.visitDate

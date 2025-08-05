@@ -44,6 +44,7 @@ const adminOptions = {
           "project",
           "status",
           "visitDate",
+          "source",
         ],
         editProperties: [
           "name",
@@ -61,17 +62,20 @@ const adminOptions = {
           "status",
           "visitDate",
           "project",
+          "source",
         ],
         showProperties: [
           "name",
           "email",
           "phone",
           "status",
+          "message",
           "visitDate",
           "notes",
           "project",
           "createdAt",
           "updatedAt",
+          "source",
         ],
         sort: {
           sortBy: "visitDate",

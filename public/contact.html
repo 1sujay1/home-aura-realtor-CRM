@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home Aura Realtor Contact Us</title>
+  </head>
+  <body>
+    <!-- contact.html -->
+    <form id="contactForm">
+      <input type="text" name="name" placeholder="Your Name" required />
+      <input type="email" name="email" placeholder="Your Email" required />
+      <textarea name="message" placeholder="Your Message" required></textarea>
+      <button type="submit">Send</button>
+    </form>
+
+    <script>
+      const form = document.getElementById("contactForm");
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData.entries());
+
+        try {
+          const res = await fetch("http://localhost:3000/api/v1/contact", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data),
+          });
+          const result = await res.json();
+          alert(result.message);
+        } catch (err) {
+          alert("Failed to send message.");
+        }
+      });
+    </script>
+  </body>
+</html>

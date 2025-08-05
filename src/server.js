@@ -6,7 +6,7 @@ import { buildAdminRouter } from "./admin/router.js";
 import dotenv from "dotenv";
 import { bundle } from "@adminjs/bundler";
 import adminRoutes from "./admin/admin.router.js";
-
+import mainRouter from "./controller/routes/router.js";
 dotenv.config();
 
 const app = express();
@@ -15,7 +15,8 @@ app.use(express.json());
 app.use(express.static("public"));
 app.use("/uploads", express.static("uploads"));
 // app.use(express.static(path.join(__dirname, "public")));
-
+// Attach main router for /api routes
+app.use("/api/v1", mainRouter);
 const start = async () => {
   await mongoose.connect(process.env.MONGO_URI);
 

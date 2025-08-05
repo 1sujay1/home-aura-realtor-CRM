@@ -6,6 +6,16 @@ const LeadSchema = new mongoose.Schema(
     name: String,
     email: String,
     phone: String,
+    source: {
+      type: String,
+      enum: ["CRM", "HOME_AURA_REALTOR"],
+      default: "CRM",
+    }, // Default source
+    mailStatus: {
+      type: String,
+      enum: ["success", "failed"],
+      default: "success",
+    }, // Status of the contact mail
     message: { type: String },
     project: { type: String },
     status: {
