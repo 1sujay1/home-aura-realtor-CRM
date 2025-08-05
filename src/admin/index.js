@@ -70,6 +70,8 @@ const adminOptions = {
           "visitDate",
           "notes",
           "project",
+          "createdAt",
+          "updatedAt",
         ],
         sort: {
           sortBy: "visitDate",

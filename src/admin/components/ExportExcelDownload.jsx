@@ -29,7 +29,12 @@ const ExportExcelDownload = () => {
           Email: r.params.email,
           Phone: r.params.phone,
           Status: r.params.status,
+          Notes: r.params.notes,
+          Project: r.params.project,
           CreatedAt: r.params.createdAt?.split("T")[0],
+          VisitDate: r.params.visitDate
+            ? new Date(r.params.visitDate).toISOString().split("T")[0]
+            : "",
         }));
 
         const worksheet = XLSX.utils.json_to_sheet(formatted);
