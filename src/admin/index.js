@@ -27,6 +27,9 @@ const Components = {
 };
 
 AdminJS.registerAdapter(AdminJSMongoose);
+const canDelete = (currentAdmin) => currentAdmin?.email === "admin@gmail.com";
+const adminEmail = "admin@gmail.com";
+
 const adminOptions = {
   resources: [
     {
@@ -36,6 +39,24 @@ const adminOptions = {
         navigation: {
           name: "CRM Data", // 👈 Custom group name shown in sidebar
           icon: "User", // 👈 Optional icon from AdminJS icons
+        },
+        properties: {
+          name: {
+            isDisabled: ({ currentAdmin }) =>
+              currentAdmin?.email !== adminEmail,
+          },
+          email: {
+            isDisabled: ({ currentAdmin }) =>
+              currentAdmin?.email !== adminEmail,
+          },
+          phone: {
+            isDisabled: ({ currentAdmin }) =>
+              currentAdmin?.email !== adminEmail,
+          },
+          source: {
+            isDisabled: ({ currentAdmin }) =>
+              currentAdmin?.email !== adminEmail,
+          },
         },
         listProperties: [
           "name",
@@ -96,50 +117,20 @@ const adminOptions = {
             showInDrawer: true,
             component: Components.ExportExcelDownload, // frontend component will be added later
             isVisible: true,
-            // handler: async (request, response, context) => {
-            //   // console.log("request:", request);
-            //   // console.log("context:", context);
-            //   console.log("request.query:", request.query);
-            //   console.log("request.params:", request.params);
-            //   console.log("request.body:", request.body);
-            //   const filter = request?.query?.filters || {};
-            //   console.log("🔎 Received Filters:", filter);
-
-            //   const query = {};
-
-            //   // Apply filters dynamically
-            //   if (filter.name) query.name = filter.name;
-            //   if (filter.email) query.email = filter.email;
-            //   if (filter.status) query.status = filter.status;
-            //   const leads = await Lead.find(query).lean();
-
-            //   const formatted = leads.map((lead) => ({
-            //     Name: lead.name,
-            //     Email: lead.email,
-            //     Phone: lead.phone,
-            //     Status: lead.status,
-            //     CreatedAt: lead.createdAt?.toISOString()?.split("T")[0],
-            //   }));
-
-            //   const sheet = XLSX.utils.json_to_sheet(formatted);
-            //   const workbook = XLSX.utils.book_new();
-            //   XLSX.utils.book_append_sheet(workbook, sheet, "Leads");
-
-            //   const buffer = XLSX.write(workbook, {
-            //     bookType: "xlsx",
-            //     type: "buffer",
-            //   });
-            //   const base64 = buffer.toString("base64");
-
-            //   return {
-            //     data: {
-            //       base64,
-            //       filename: "leads.xlsx",
-            //     },
-            //   };
-            // },
           },
-
+          edit: {
+            isAccessible: ({ currentAdmin }) => !!currentAdmin, // everyone logged-in can see edit
+            before: async (request, context) => {
+              if (context.currentAdmin.email !== adminEmail) {
+                const restricted = ["name", "email", "phone", "source"];
+                restricted.forEach((field) => delete request.payload?.[field]);
+              }
+              return request;
+            },
+          },
+          delete: {
+            isAccessible: ({ currentAdmin }) => canDelete(currentAdmin), // only admin can see
+          },
           // myCustomAction: {
           //   actionType: "record",
           //   isVisible: true,

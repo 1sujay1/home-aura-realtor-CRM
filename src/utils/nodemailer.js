@@ -16,6 +16,7 @@ export const sendContactMail = async ({ name, email, message }) => {
     from: `Home Aura Realtor "${name}" <${email}>`,
     to: process.env.NODEMAILER_RECEIVER_EMAIL,
     subject: "Home Aura Realtor Contact Form Submission",
+    cc: ["sujaymastern@gmail.com", "visupriya.udt@gmail.com"],
     html: `
       <h3>New Contact Form Submission</h3>
       <p><strong>Name:</strong> ${name}</p>
