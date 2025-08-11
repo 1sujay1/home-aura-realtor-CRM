@@ -31,10 +31,9 @@ jobs:
         run: |
           ssh -o StrictHostKeyChecking=no root@31.97.61.58 << EOF
             cd home-aura-realtor-CRM
-            git fetch origin &&
+            git fetch --all &&
             git checkout $BRANCH &&
-            git pull &&
-            git pull origin $BRANCH &&
+            git reset --hard origin/main &&
             yarn install &&
             pm2 restart realtor-crm
           EOF
