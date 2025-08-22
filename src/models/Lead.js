@@ -6,6 +6,7 @@ const LeadSchema = new mongoose.Schema(
     name: String,
     email: String,
     phone: String,
+    secondaryPhone: String,
     source: {
       type: String,
       enum: ["CRM", "HOME_AURA_REALTOR"],
