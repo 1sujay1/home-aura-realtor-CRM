@@ -40,6 +40,36 @@ export const sendContactMail = async ({
   return transporter.sendMail(mailOptions); // returns a promise
 };
 const Clients = {
+  HOME_AURA_REALTOR: {
+    name: "Home Aura Realtor",
+    user: process.env.HOME_AURA_REALTOR_NODE_MAILER_EMAIL,
+    pass: process.env.HOME_AURA_REALTOR_NODE_MAILER_PASSWORD,
+    ccMail: process.env.HOME_AURA_REALTOR_CC_EMAILS
+      ? JSON.parse(process.env.HOME_AURA_REALTOR_CC_EMAILS)
+      : [],
+    receiverEmail: process.env.HOME_AURA_REALTOR_RECEIVER_EMAIL,
+    displayEmail: "projects@homeaurarealtor.com",
+  },
+  ABHEE_CODENAME_YOU: {
+    name: "Abhee Codename You",
+    user: process.env.HOME_AURA_REALTOR_NODE_MAILER_EMAIL,
+    pass: process.env.HOME_AURA_REALTOR_NODE_MAILER_PASSWORD,
+    ccMail: process.env.HOME_AURA_REALTOR_CC_EMAILS
+      ? JSON.parse(process.env.HOME_AURA_REALTOR_CC_EMAILS)
+      : [],
+    receiverEmail: process.env.HOME_AURA_REALTOR_RECEIVER_EMAIL,
+    displayEmail: "projects@abheecodenameyou.com",
+  },
+  GODREJ_LAKESIDE_ORCHARD: {
+    name: "Godrej Lakeside Orchard",
+    user: process.env.HOME_AURA_REALTOR_NODE_MAILER_EMAIL,
+    pass: process.env.HOME_AURA_REALTOR_NODE_MAILER_PASSWORD,
+    ccMail: process.env.HOME_AURA_REALTOR_CC_EMAILS
+      ? JSON.parse(process.env.HOME_AURA_REALTOR_CC_EMAILS)
+      : [],
+    receiverEmail: process.env.HOME_AURA_REALTOR_RECEIVER_EMAIL,
+    displayEmail: "projects@godrejlakesideorchard.com",
+  },
   SATTVA_VASANTA_SKYE: {
     name: "Sattva Vasant Skye",
     user: process.env.SATTVA_VASANTA_NODE_MAILER_EMAIL,
@@ -59,7 +89,10 @@ export const sendClientContactMail = async ({
   project,
   secondaryPhone,
 }) => {
-  const currentClient = Clients[project];
+  let currentClient = Clients[project];
+  if (!currentClient) {
+    currentClient = Clients["HOME_AURA_REALTOR"];
+  }
   const transporter = nodemailer.createTransport({
     service: "gmail", // or configure host/port manually
     auth: {
