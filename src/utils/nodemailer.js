@@ -70,6 +70,16 @@ const Clients = {
     receiverEmail: process.env.HOME_AURA_REALTOR_RECEIVER_EMAIL,
     displayEmail: "projects@godrejlakesideorchard.com",
   },
+  SATTVA_SIMPLICITY: {
+    name: "Sattva Simplicity",
+    user: process.env.HOME_AURA_REALTOR_NODE_MAILER_EMAIL,
+    pass: process.env.HOME_AURA_REALTOR_NODE_MAILER_PASSWORD,
+    ccMail: process.env.HOME_AURA_REALTOR_CC_EMAILS
+      ? JSON.parse(process.env.HOME_AURA_REALTOR_CC_EMAILS)
+      : [],
+    receiverEmail: process.env.HOME_AURA_REALTOR_RECEIVER_EMAIL,
+    displayEmail: "projects@sattvasimplicity.com",
+  },
   SATTVA_VASANTA_SKYE: {
     name: "Sattva Vasant Skye",
     user: process.env.SATTVA_VASANTA_NODE_MAILER_EMAIL,
