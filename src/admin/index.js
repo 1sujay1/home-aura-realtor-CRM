@@ -68,6 +68,7 @@ const adminOptions = {
           "status",
           "visitDate",
           "source",
+          "createdAt",
         ],
         editProperties: [
           "name",
@@ -191,6 +192,7 @@ const adminOptions = {
           "status",
           "visitDate",
           "source",
+          "createdAt",
         ],
         editProperties: [
           "name",
