@@ -70,6 +70,16 @@ const Clients = {
     receiverEmail: process.env.HOME_AURA_REALTOR_RECEIVER_EMAIL,
     displayEmail: "projects@godrejlakesideorchard.com",
   },
+  INTERIORS_HOME_AURA_REALTOR: {
+    name: "Interiors Home Aura Realtor",
+    user: process.env.HOME_AURA_REALTOR_NODE_MAILER_EMAIL,
+    pass: process.env.HOME_AURA_REALTOR_NODE_MAILER_PASSWORD,
+    ccMail: process.env.HOME_AURA_REALTOR_CC_EMAILS
+      ? JSON.parse(process.env.HOME_AURA_REALTOR_CC_EMAILS)
+      : [],
+    receiverEmail: process.env.HOME_AURA_REALTOR_RECEIVER_EMAIL,
+    displayEmail: "projects@interiorshomeaurarealtor.com",
+  },
   PROVIDENT_SUNWORTH_CITY: {
     name: "Provident Sunworth City",
     user: process.env.HOME_AURA_REALTOR_NODE_MAILER_EMAIL,

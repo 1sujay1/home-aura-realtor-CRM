@@ -77,7 +77,7 @@ router.post("/client/contact", async (req, res) => {
     await sendClientContactMail({
       name,
       email,
-      message,
+      message: message || "",
       phone,
       project,
       secondaryPhone,
@@ -99,7 +99,7 @@ router.post("/client/contact", async (req, res) => {
       name,
       email,
       phone,
-      message,
+      message: message || "",
       mailStatus,
       secondaryPhone,
       source: source || "PORTAL",
