@@ -147,25 +147,18 @@ router.get("/webhook", (req, res) => {
 router.post("/webhook", async (req, res) => {
   console.log("Webhook event:", JSON.stringify(req.body, null, 2));
 
-  if (req.body.entry) {
-    for (let entry of req.body.entry) {
-      if (entry.changes) {
-        for (let change of entry.changes) {
-          if (change.field === "leadgen") {
-            const leadId = change.value.leadgen_id;
-            console.log("📩 New Lead ID:", leadId);
+  const data = req.body;
 
-            // Fetch full lead details
-            const lead = await fetchLead(leadId, PAGE_ACCESS_TOKEN);
+  if (data.field === "leadgen") {
+    const leadId = data.value.leadgen_id;
+    console.log("📩 New Lead ID:", leadId);
 
-            console.log(
-              "Lead details:******************$$$$$$$$$$$$$$$$$$$",
-              lead
-            );
-          }
-        }
-      }
-    }
+    // Step 2: fetch full lead details using Graph API
+    const leadDetails = await fetchLead(leadId, PAGE_ACCESS_TOKEN);
+    console.log("Full lead:", leadDetails);
+
+    // Step 3: Send email with lead info
+    await sendMail(JSON.stringify(leadDetails, null, 2));
   }
 
   res.sendStatus(200);
