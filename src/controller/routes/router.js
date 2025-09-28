@@ -130,7 +130,7 @@ const PAGE_ACCESS_TOKEN =
   "EAALhuwyEBSsBPiwcjgY8OP639yN2tkZBmm3hx3Vi7suSnLOljNTF5AUoRXZBVhTAT0gPzMfnjpoWcZAqMP4KEBcWQWOZCgKTH4dZBZCpZCU6FygXM7MKskj715hbq7wSAvYbZCPJTNlhrTsFYJjeWxLwXooiWsW2ZCUMePMUac5gugFOybDV7tKZAQCF9nxP2mNsYRu0ePSICf73lV1DM80ssX"; // will be added later
 
 // ✅ Step 1: Verification (Facebook calls this when setting up webhook)
-app.get("/webhook", (req, res) => {
+router.get("/webhook", (req, res) => {
   console.log("Webhook verification request:", req.query);
   const mode = req.query["hub.mode"];
   const token = req.query["hub.verify_token"];
@@ -144,7 +144,7 @@ app.get("/webhook", (req, res) => {
   }
 });
 // ✅ Step 2: Facebook will POST leads here
-app.post("/webhook", async (req, res) => {
+router.post("/webhook", async (req, res) => {
   console.log("Webhook event:", JSON.stringify(req.body, null, 2));
 
   if (req.body.entry) {
