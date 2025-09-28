@@ -155,10 +155,10 @@ router.post("/webhook", async (req, res) => {
 
     // Step 2: fetch full lead details using Graph API
     const leadDetails = await fetchLead(leadId, PAGE_ACCESS_TOKEN);
-    console.log("Full lead:", leadDetails);
-
+    console.log("Full lead:********************", leadDetails);
+    res.json(leadDetails);
     // Step 3: Send email with lead info
-    await sendMail(JSON.stringify(leadDetails, null, 2));
+    // await sendMail(JSON.stringify(leadDetails, null, 2));
   }
 
   res.sendStatus(200);
