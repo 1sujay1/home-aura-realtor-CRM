@@ -5,6 +5,7 @@ import {
   sendContactMail,
 } from "../../utils/nodemailer.js";
 import ClientLead from "../../models/ClientLeads.js";
+import { fetchLead } from "../../utils/fetchLead.js";
 
 const router = express.Router();
 
@@ -123,4 +124,59 @@ router.post("/client/contact", async (req, res) => {
     });
   }
 });
+
+const VERIFY_TOKEN = "fb_leads_secret"; // use the same in FB webhook setup
+const PAGE_ACCESS_TOKEN =
+  "EAALhuwyEBSsBPiwcjgY8OP639yN2tkZBmm3hx3Vi7suSnLOljNTF5AUoRXZBVhTAT0gPzMfnjpoWcZAqMP4KEBcWQWOZCgKTH4dZBZCpZCU6FygXM7MKskj715hbq7wSAvYbZCPJTNlhrTsFYJjeWxLwXooiWsW2ZCUMePMUac5gugFOybDV7tKZAQCF9nxP2mNsYRu0ePSICf73lV1DM80ssX"; // will be added later
+
+// ✅ Step 1: Verification (Facebook calls this when setting up webhook)
+app.get("/webhook", (req, res) => {
+  console.log("Webhook verification request:", req.query);
+  const mode = req.query["hub.mode"];
+  const token = req.query["hub.verify_token"];
+  const challenge = req.query["hub.challenge"];
+
+  if (mode && token === VERIFY_TOKEN) {
+    console.log("Webhook verified ✅");
+    res.status(200).send(challenge);
+  } else {
+    res.sendStatus(403);
+  }
+});
+// ✅ Step 2: Facebook will POST leads here
+app.post("/webhook", async (req, res) => {
+  console.log("Webhook event:", JSON.stringify(req.body, null, 2));
+
+  if (req.body.entry) {
+    for (let entry of req.body.entry) {
+      if (entry.changes) {
+        for (let change of entry.changes) {
+          if (change.field === "leadgen") {
+            const leadId = change.value.leadgen_id;
+            console.log("📩 New Lead ID:", leadId);
+
+            // Fetch full lead details
+            const lead = await fetchLead(leadId, PAGE_ACCESS_TOKEN);
+
+            console.log(
+              "Lead details:******************$$$$$$$$$$$$$$$$$$$",
+              lead
+            );
+          }
+        }
+      }
+    }
+  }
+
+  res.sendStatus(200);
+});
+
+// ✅ Helper: Fetch lead details from Facebook
+// async function fetchLead(leadId) {
+//   const response = await fetch(
+//     `https://graph.facebook.com/v20.0/${leadId}?access_token=${PAGE_ACCESS_TOKEN}`
+//   );
+//   return await response.json();
+// }
+
 export default router;
