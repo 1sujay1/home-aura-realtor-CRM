@@ -6,6 +6,7 @@ import {
 } from "../../utils/nodemailer.js";
 import ClientLead from "../../models/ClientLeads.js";
 import { fetchLead } from "../../utils/fetchLead.js";
+import { FORM_DATA } from "../../utils/constants.js";
 
 const router = express.Router();
 
@@ -153,15 +154,74 @@ router.post("/webhook", async (req, res) => {
         for (let change of entry.changes) {
           if (change.field === "leadgen") {
             const leadId = change.value.leadgen_id;
+            const formId = change.value.form_id;
+            const form = FORM_DATA.find((form) => form.id === formId);
             console.log("📩 New Lead ID:", leadId);
+            console.log("📩 New Form ID:", form);
+            let formName = form ? form.name : "HOME_AURA_REALTOR";
+            try {
+              // Fetch full lead details from FB Graph API
+              const lead = await fetchLead(leadId, PAGE_ACCESS_TOKEN);
+              // const lead = {
+              //   created_time: "2025-10-02T08:02:42+0000",
+              //   id: "1449736202763543",
+              //   field_data: [
+              //     {
+              //       name: "email",
+              //       values: ["test@fb.com"],
+              //     },
+              //     {
+              //       name: "phone",
+              //       values: ["dummy data for phone"],
+              //     },
+              //     {
+              //       name: "full_name",
+              //       values: ["dummy data for full_name"],
+              //     },
+              //   ],
+              // };
 
-            // Fetch full lead details
-            const lead = await fetchLead(leadId, PAGE_ACCESS_TOKEN);
+              console.log("Lead details:", lead);
 
-            console.log(
-              "Lead details:******************$$$$$$$$$$$$$$$$$$$",
-              lead
-            );
+              // Extract name, email, phone
+              const leadData = {};
+              if (lead.field_data && Array.isArray(lead.field_data)) {
+                lead.field_data.forEach((field) => {
+                  const key = field.name;
+                  const value = field.values[0]; // Take first value
+                  leadData[key] = value;
+                });
+              }
+
+              console.log("Parsed leadData:", leadData);
+              const { full_name, email, phone, name, mobile } = leadData;
+
+              const contactFormData = await fetch(
+                `${process.env.BACKEND_URL}/api/v1/client/contact`,
+                {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify({
+                    name: full_name || name,
+                    email,
+                    phone: phone || mobile,
+                    project: formName,
+                    source: "FACEBOOK",
+                    message: "Lead from Facebook",
+                    secondaryPhone: "",
+                  }),
+                }
+              );
+
+              console.log(
+                "✅ Lead saved and email triggered",
+                contactFormData.json()
+              );
+            } catch (err) {
+              console.error("Error fetching or saving lead:", err);
+            }
           }
         }
       }

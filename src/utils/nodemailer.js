@@ -111,6 +111,15 @@ const Clients = {
     displayEmail: "projects@sattva-vasantaskye.com",
   },
 };
+function escapeHtml(str) {
+  if (!str) return "";
+  return str
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
 export const sendClientContactMail = async ({
   name,
   email,
@@ -119,6 +128,14 @@ export const sendClientContactMail = async ({
   project,
   secondaryPhone,
 }) => {
+  console.log("Mail Data", {
+    name,
+    email,
+    message,
+    phone,
+    project,
+    secondaryPhone,
+  });
   let currentClient = Clients[project];
   if (!currentClient) {
     currentClient = Clients["HOME_AURA_REALTOR"];
@@ -137,10 +154,10 @@ export const sendClientContactMail = async ({
     cc: currentClient.ccMail,
     html: `
       <h3>New Contact Form Submission</h3>
-      <p><strong>Name:</strong> ${name}</p>
-      <p><strong>Email:</strong> ${email}</p>
-      <p><strong>Message:</strong> ${message}</p>
-      <p><strong>Phone:</strong> ${phone}</p>
+      <p><strong>Name:</strong> ${escapeHtml(name)}</p>
+      <p><strong>Email:</strong> ${escapeHtml(email)}</p>
+      <p><strong>Message:</strong> ${escapeHtml(message)}</p>
+      <p><strong>Phone:</strong> ${escapeHtml(phone)}</p>
       ${
         secondaryPhone
           ? `<p><strong>Secondary Phone:</strong> ${secondaryPhone}</p>`

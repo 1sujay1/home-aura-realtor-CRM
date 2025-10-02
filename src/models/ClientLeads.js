@@ -9,7 +9,14 @@ const ClientLeadSchema = new mongoose.Schema(
     secondaryPhone: String,
     source: {
       type: String,
-      enum: ["PORTAL"],
+      enum: [
+        "PORTAL",
+        "FACEBOOK",
+        "INSTAGRAM",
+        "WHATSAPP",
+        "REFERRAL",
+        "OTHER",
+      ],
       default: "PORTAL",
     }, // Default source
     mailStatus: {
