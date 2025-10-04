@@ -26,10 +26,10 @@ const Components = {
     "ExportExcelDownload",
     "./components/ExportExcelDownload"
   ),
-  ExpenseDashboardComponent: componentLoader.add(
-    "ExpenseDashboardComponent",
-    "./components/ExpenseDashboardComponent"
-  ),
+  // ExpenseDashboardComponent: componentLoader.add(
+  //   "ExpenseDashboardComponent",
+  //   "./components/ExpenseDashboardComponent"
+  // ),
   // other custom components
 };
 
@@ -409,7 +409,7 @@ const adminOptions = {
           },
           list: {
             isAccessible: ({ currentAdmin }) => onlyAdmin(currentAdmin), // only admin can do
-            component: Components.ExpenseDashboardComponent,
+            // component: Components.ExpenseDashboardComponent,
           },
           show: {
             isAccessible: ({ currentAdmin }) => onlyAdmin(currentAdmin), // only admin can do
