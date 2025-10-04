@@ -5,6 +5,8 @@ import Lead from "../models/Lead.js";
 import ClientLead from "../models/ClientLeads.js";
 import { fileURLToPath } from "url";
 import path from "path";
+import RentLead from "../models/RentLead.js";
+import ExpenseEntry from "../models/ExpenseEntry.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -28,8 +30,8 @@ const Components = {
 };
 
 AdminJS.registerAdapter(AdminJSMongoose);
-const canDelete = (currentAdmin) => currentAdmin?.email === "admin@gmail.com";
 const adminEmail = "admin@gmail.com";
+const onlyAdmin = (currentAdmin) => currentAdmin?.email === adminEmail;
 
 const adminOptions = {
   resources: [
@@ -139,7 +141,7 @@ const adminOptions = {
             },
           },
           delete: {
-            isAccessible: ({ currentAdmin }) => canDelete(currentAdmin), // only admin can see
+            isAccessible: ({ currentAdmin }) => onlyAdmin(currentAdmin), // only admin can see
           },
           // myCustomAction: {
           //   actionType: "record",
@@ -248,8 +250,18 @@ const adminOptions = {
             },
           },
           delete: {
-            isAccessible: ({ currentAdmin }) => canDelete(currentAdmin), // only admin can see
+            isAccessible: ({ currentAdmin }) => onlyAdmin(currentAdmin), // only admin can see
           },
+          // list: {
+          //   isAccessible: ({ currentAdmin }) => onlyAdmin(currentAdmin), // only admin can see
+          // },
+          // show: {
+          //   isAccessible: ({ currentAdmin }) => onlyAdmin(currentAdmin), // only admin can see
+          // },
+          // new: {
+          //   isAccessible: ({ currentAdmin }) => onlyAdmin(currentAdmin), // only admin can see
+          // },
+
           // myCustomAction: {
           //   actionType: "record",
           //   isVisible: true,
@@ -263,6 +275,143 @@ const adminOptions = {
           //   },
           //   showInDrawer: true,
           // },
+        },
+        // isVisible: ({ currentAdmin }) =>
+        //   currentAdmin && currentAdmin.role === "admin",
+      },
+    },
+    {
+      resource: RentLead,
+      options: {
+        id: "Rent Leads",
+        navigation: {
+          name: "CRM Data", // 👈 Custom group name shown in sidebar
+          icon: "User", // 👈 Optional icon from AdminJS icons
+        },
+        listProperties: [
+          "flat",
+          "rent",
+          "advance",
+          "location",
+          "availability",
+          "notes",
+        ],
+        editProperties: [
+          "ownerName",
+          "ownerPhone",
+          "flat",
+          "rent",
+          "advance",
+          "location",
+          "parking",
+          "security",
+          "availability",
+          "notes",
+        ],
+        filterProperties: ["flat", "location", "rent"],
+        showProperties: [
+          "ownerName",
+          "ownerPhone",
+          "flat",
+          "rent",
+          "advance",
+          "location",
+          "parking",
+          "security",
+          "source",
+          "availability",
+          "notes",
+          "createdAt",
+          "updatedAt",
+        ],
+        sort: {
+          sortBy: "createdAt",
+          direction: "desc",
+        },
+        actions: {
+          edit: {
+            isAccessible: ({ currentAdmin }) => onlyAdmin(currentAdmin), // only admin can do
+          },
+          delete: {
+            isAccessible: ({ currentAdmin }) => onlyAdmin(currentAdmin), // only admin can do
+          },
+          list: {
+            isAccessible: ({ currentAdmin }) => onlyAdmin(currentAdmin), // only admin can do
+          },
+          show: {
+            isAccessible: ({ currentAdmin }) => onlyAdmin(currentAdmin), // only admin can do
+          },
+          new: {
+            isAccessible: ({ currentAdmin }) => onlyAdmin(currentAdmin), // only admin can do
+          },
+        },
+      },
+    },
+    {
+      resource: ExpenseEntry,
+      options: {
+        id: "Expense Entries",
+        navigation: {
+          name: "Internal", // 👈 Custom group name shown in sidebar
+          icon: "User", // 👈 Optional icon from AdminJS icons
+        },
+        listProperties: [
+          "category",
+          "description",
+          "amount",
+          "date",
+          "paymentMode",
+        ],
+        editProperties: [
+          "category",
+          "description",
+          "amount",
+          "date",
+          "paymentMode",
+          "paymentMadeBy",
+          "expenseType",
+          "notes",
+        ],
+        filterProperties: [
+          "paymentMadeBy",
+          "paymentMode",
+          "expenseType",
+          "amount",
+          "date",
+          "category",
+        ],
+        showProperties: [
+          "category",
+          "description",
+          "amount",
+          "date",
+          "paymentMode",
+          "paymentMadeBy",
+          "expenseType",
+          "notes",
+          "createdAt",
+          "updatedAt",
+        ],
+        sort: {
+          sortBy: "createdAt",
+          direction: "desc",
+        },
+        actions: {
+          edit: {
+            isAccessible: ({ currentAdmin }) => onlyAdmin(currentAdmin), // only admin can do
+          },
+          delete: {
+            isAccessible: ({ currentAdmin }) => onlyAdmin(currentAdmin), // only admin can do
+          },
+          list: {
+            isAccessible: ({ currentAdmin }) => onlyAdmin(currentAdmin), // only admin can do
+          },
+          show: {
+            isAccessible: ({ currentAdmin }) => onlyAdmin(currentAdmin), // only admin can do
+          },
+          new: {
+            isAccessible: ({ currentAdmin }) => onlyAdmin(currentAdmin), // only admin can do
+          },
         },
       },
     },
