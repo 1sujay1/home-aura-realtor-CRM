@@ -27,7 +27,10 @@ export const buildAdminRouter = (admin) => {
         password === DEFAULT_ADMIN.password
       ) {
         return { email: DEFAULT_ADMIN.email, role: "admin" };
-      } else if (email === "staff@gmail.com" && password === "Staff@123#") {
+      } else if (
+        email === "staff@gmail.com" &&
+        password === process.env.STAFF_PASSWORD
+      ) {
         return { email, role: "staff" };
       }
       return null;
