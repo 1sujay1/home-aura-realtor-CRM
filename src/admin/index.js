@@ -26,6 +26,10 @@ const Components = {
     "ExportExcelDownload",
     "./components/ExportExcelDownload"
   ),
+  ExpenseDashboardComponent: componentLoader.add(
+    "ExpenseDashboardComponent",
+    "./components/ExpenseDashboardComponent"
+  ),
   // other custom components
 };
 
@@ -405,6 +409,7 @@ const adminOptions = {
           },
           list: {
             isAccessible: ({ currentAdmin }) => onlyAdmin(currentAdmin), // only admin can do
+            component: Components.ExpenseDashboardComponent,
           },
           show: {
             isAccessible: ({ currentAdmin }) => onlyAdmin(currentAdmin), // only admin can do
@@ -420,7 +425,7 @@ const adminOptions = {
   branding: {
     companyName: "RealEstate CRM",
     softwareBrothers: false,
-    logo: false,
+    logo: "https://homeaurarealtor.com/assets/img/logo157.png",
   },
   assets: {
     styles: ["./admin.css"], // 👈 Make sure this path matches your setup
