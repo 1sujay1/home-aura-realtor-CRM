@@ -329,18 +329,18 @@ const adminOptions = {
           direction: "desc",
         },
         actions: {
-          edit: {
-            isAccessible: ({ currentAdmin }) => onlyAdmin(currentAdmin), // only admin can do
-          },
+          // edit: {
+          //   isAccessible: ({ currentAdmin }) => onlyAdmin(currentAdmin), // only admin can do
+          // },
           delete: {
             isAccessible: ({ currentAdmin }) => onlyAdmin(currentAdmin), // only admin can do
           },
-          list: {
-            isAccessible: ({ currentAdmin }) => onlyAdmin(currentAdmin), // only admin can do
-          },
-          show: {
-            isAccessible: ({ currentAdmin }) => onlyAdmin(currentAdmin), // only admin can do
-          },
+          // list: {
+          //   isAccessible: ({ currentAdmin }) => onlyAdmin(currentAdmin), // only admin can do
+          // },
+          // show: {
+          //   isAccessible: ({ currentAdmin }) => onlyAdmin(currentAdmin), // only admin can do
+          // },
           new: {
             isAccessible: ({ currentAdmin }) => onlyAdmin(currentAdmin), // only admin can do
           },
@@ -352,7 +352,7 @@ const adminOptions = {
       options: {
         id: "Expense Entries",
         navigation: {
-          name: "Internal", // 👈 Custom group name shown in sidebar
+          name: "Admin Section", // 👈 Custom group name shown in sidebar
           icon: "User", // 👈 Optional icon from AdminJS icons
         },
         listProperties: [

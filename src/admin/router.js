@@ -22,11 +22,14 @@ export const buildAdminRouter = (admin) => {
       //     password,
       //   };
       // }
-      if (email === DEFAULT_ADMIN.email && password === DEFAULT_ADMIN.password) {
-  return { email:DEFAULT_ADMIN.email, role: "admin" };
-} else if (email === "staff@gmail.com" && password === "1234") {
-  return { email, role: "staff" };
-}
+      if (
+        email === DEFAULT_ADMIN.email &&
+        password === DEFAULT_ADMIN.password
+      ) {
+        return { email: DEFAULT_ADMIN.email, role: "admin" };
+      } else if (email === "staff@gmail.com" && password === "Staff@123#") {
+        return { email, role: "staff" };
+      }
       return null;
     },
     cookieName: "adminjs",
