@@ -341,9 +341,9 @@ const adminOptions = {
           // show: {
           //   isAccessible: ({ currentAdmin }) => onlyAdmin(currentAdmin), // only admin can do
           // },
-          new: {
-            isAccessible: ({ currentAdmin }) => onlyAdmin(currentAdmin), // only admin can do
-          },
+          // new: {
+          //   isAccessible: ({ currentAdmin }) => onlyAdmin(currentAdmin), // only admin can do
+          // },
         },
       },
     },
