@@ -126,7 +126,12 @@ const Dashboard = () => {
           properties using the navigation sidebar. Admin-only sections are
           restricted.
         </Text>
-        <Box display="flex" gap="20px" mt="lg">
+        <Box
+          display="flex"
+          gap="20px"
+          mt="lg"
+          style={{ flexWrap: "wrap", gap: "10px", padding: "10px" }}
+        >
           <a href="/admin/resources/Leads">
             <Button variant="primary">Leads</Button>
           </a>
@@ -151,14 +156,25 @@ const Dashboard = () => {
       p="xl"
       style={{ minHeight: "100vh", animation: "fadeIn 0.6s ease-in-out" }}
     >
-      <H2>🏡 Home Aura Realtor</H2>
+      <H2 style={{ textAlign: "center" }}>🏡 Home Aura Realtor</H2>
       <Text mt="lg" mb="xl" lineHeight="lg" textAlign="center">
         Welcome to your CRM dashboard. Track leads, manage expenses, and monitor
         business performance — all in one place.
       </Text>
 
       {/* Navigation Buttons */}
-      <Box display="flex" gap="md" mb="xl">
+      <Box
+        display="flex"
+        gap="md"
+        mb="xl"
+        style={{
+          flexWrap: "wrap",
+          alignItems: "center",
+          padding: "10px",
+          gap: "10px",
+          justifyContent: "center",
+        }}
+      >
         <Button as="a" href="/admin/resources/Leads" variant="primary">
           Leads
         </Button>
@@ -191,6 +207,7 @@ const Dashboard = () => {
         mb="xl"
         gap="20px"
         flexWrap="wrap"
+        style={{ gap: "10px", padding: "10px" }}
       >
         <Box>
           <Text fontWeight="bold">Select Year:</Text>
@@ -238,6 +255,7 @@ const Dashboard = () => {
         display="grid"
         gridTemplateColumns="repeat(auto-fill, minmax(200px, 1fr))"
         gap="20px"
+        style={{ gap: "10px", padding: "10px" }}
       >
         {Object.entries(totals).map(([key, value]) => (
           <Box
