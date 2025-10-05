@@ -1,7 +1,7 @@
 // Mongoose schema for leads (Lead)
 import mongoose from "mongoose";
 
-const RentLeadSchema = new mongoose.Schema(
+const PropertyOwnerLeadSchema = new mongoose.Schema(
   {
     ownerName: String,
     ownerPhone: String,
@@ -133,9 +133,27 @@ const RentLeadSchema = new mongoose.Schema(
       ],
       default: "Not Provided",
     },
+    status: {
+      type: String,
+      enum: [
+        "New / Fresh Lead",
+        "Contacted / Attempted to Contact",
+        "Interested / Warm Lead",
+        "Not Interested",
+        "Follow-Up Scheduled",
+        "Site Visit Scheduled / Done",
+        "Negotiation / Booking in Progress",
+        "Closed - Won",
+        "Closed - Lost",
+      ],
+      default: "New / Fresh Lead",
+    },
   },
   { timestamps: true }
 );
 
-const RentLead = mongoose.model("RentLead", RentLeadSchema);
-export default RentLead;
+const PropertyOwnerLead = mongoose.model(
+  "PropertyOwnerLead",
+  PropertyOwnerLeadSchema
+);
+export default PropertyOwnerLead;

@@ -5,8 +5,9 @@ import Lead from "../models/Lead.js";
 import ClientLead from "../models/ClientLeads.js";
 import { fileURLToPath } from "url";
 import path from "path";
-import RentLead from "../models/RentLead.js";
+import PropertyOwnerLead from "../models/PropertyOwnerLead.js";
 import ExpenseEntry from "../models/ExpenseEntry.js";
+import TenantLead from "../models/TenantLead.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -36,6 +37,18 @@ const Components = {
 AdminJS.registerAdapter(AdminJSMongoose);
 const adminEmail = "admin@gmail.com";
 const onlyAdmin = (currentAdmin) => currentAdmin?.email === adminEmail;
+const dashboardHandler = async (req, res, context) => {
+  // ✅ You get currentAdmin here
+  const { currentAdmin } = context;
+
+  const expenseData = await ExpenseEntry.find({ status: "Completed" });
+  // You can pass anything you want to the frontend
+  return {
+    email: currentAdmin?.email,
+    role: currentAdmin?.role,
+    data: expenseData,
+  };
+};
 
 const adminOptions = {
   resources: [
@@ -166,7 +179,7 @@ const adminOptions = {
     {
       resource: ClientLead,
       options: {
-        id: "Client Leads",
+        id: "Client-Leads",
         navigation: {
           name: "CRM Data", // 👈 Custom group name shown in sidebar
           icon: "User", // 👈 Optional icon from AdminJS icons
@@ -285,9 +298,9 @@ const adminOptions = {
       },
     },
     {
-      resource: RentLead,
+      resource: PropertyOwnerLead,
       options: {
-        id: "Rent Leads",
+        id: "Property-Owners",
         navigation: {
           name: "CRM Data", // 👈 Custom group name shown in sidebar
           icon: "User", // 👈 Optional icon from AdminJS icons
@@ -299,6 +312,7 @@ const adminOptions = {
           "location",
           "availability",
           "notes",
+          "status",
         ],
         editProperties: [
           "ownerName",
@@ -311,8 +325,9 @@ const adminOptions = {
           "security",
           "availability",
           "notes",
+          "status",
         ],
-        filterProperties: ["flat", "location", "rent"],
+        filterProperties: ["flat", "location", "rent", "status"],
         showProperties: [
           "ownerName",
           "ownerPhone",
@@ -325,6 +340,72 @@ const adminOptions = {
           "source",
           "availability",
           "notes",
+          "status",
+          "createdAt",
+          "updatedAt",
+        ],
+        sort: {
+          sortBy: "createdAt",
+          direction: "desc",
+        },
+        actions: {
+          // edit: {
+          //   isAccessible: ({ currentAdmin }) => onlyAdmin(currentAdmin), // only admin can do
+          // },
+          delete: {
+            isAccessible: ({ currentAdmin }) => onlyAdmin(currentAdmin), // only admin can do
+          },
+          // list: {
+          //   isAccessible: ({ currentAdmin }) => onlyAdmin(currentAdmin), // only admin can do
+          // },
+          // show: {
+          //   isAccessible: ({ currentAdmin }) => onlyAdmin(currentAdmin), // only admin can do
+          // },
+          // new: {
+          //   isAccessible: ({ currentAdmin }) => onlyAdmin(currentAdmin), // only admin can do
+          // },
+        },
+      },
+    },
+    {
+      resource: TenantLead,
+      options: {
+        id: "Tenant-Leads",
+        navigation: {
+          name: "CRM Data", // 👈 Custom group name shown in sidebar
+          icon: "User", // 👈 Optional icon from AdminJS icons
+        },
+        listProperties: ["name", "email", "phone", "status", "budget"],
+        editProperties: [
+          "name",
+          "email",
+          "phone",
+          "status",
+          "budget",
+          "tenantType",
+          "notes",
+          "location",
+          "availability",
+        ],
+        filterProperties: [
+          "name",
+          "email",
+          "phone",
+          "status",
+          "location",
+          "tenantType",
+        ],
+        showProperties: [
+          "name",
+          "email",
+          "phone",
+          "status",
+          "budget",
+          "tenantType",
+          "notes",
+          "location",
+          "source",
+          "availability",
           "createdAt",
           "updatedAt",
         ],
@@ -354,7 +435,7 @@ const adminOptions = {
     {
       resource: ExpenseEntry,
       options: {
-        id: "Expense Entries",
+        id: "Expense-Entries",
         navigation: {
           name: "Admin Section", // 👈 Custom group name shown in sidebar
           icon: "User", // 👈 Optional icon from AdminJS icons
@@ -365,6 +446,7 @@ const adminOptions = {
           "amount",
           "date",
           "paymentMode",
+          "status",
         ],
         editProperties: [
           "category",
@@ -375,6 +457,7 @@ const adminOptions = {
           "paymentMadeBy",
           "expenseType",
           "notes",
+          "status",
         ],
         filterProperties: [
           "paymentMadeBy",
@@ -383,6 +466,7 @@ const adminOptions = {
           "amount",
           "date",
           "category",
+          "status",
         ],
         showProperties: [
           "category",
@@ -393,6 +477,7 @@ const adminOptions = {
           "paymentMadeBy",
           "expenseType",
           "notes",
+          "status",
           "createdAt",
           "updatedAt",
         ],
@@ -409,7 +494,6 @@ const adminOptions = {
           },
           list: {
             isAccessible: ({ currentAdmin }) => onlyAdmin(currentAdmin), // only admin can do
-            // component: Components.ExpenseDashboardComponent,
           },
           show: {
             isAccessible: ({ currentAdmin }) => onlyAdmin(currentAdmin), // only admin can do
@@ -432,6 +516,7 @@ const adminOptions = {
   },
   dashboard: {
     component: Components.Dashboard,
+    handler: dashboardHandler,
   },
   login: {
     component: Components.Login,

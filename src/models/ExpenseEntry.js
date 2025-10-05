@@ -23,6 +23,11 @@ const ExpenseEntrySchema = new mongoose.Schema(
       default: "Other",
     },
     notes: { type: String },
+    status: {
+      type: String,
+      enum: ["Pending", "Completed", "Cancelled"],
+      default: "Pending",
+    },
   },
   { timestamps: true }
 );
