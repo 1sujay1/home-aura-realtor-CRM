@@ -7,6 +7,8 @@ import dotenv from "dotenv";
 import { bundle } from "@adminjs/bundler";
 import adminRoutes from "./admin/admin.router.js";
 import mainRouter from "./controller/routes/router.js";
+import * as url from "url";
+import path from "path";
 dotenv.config();
 
 const app = express();
@@ -17,6 +19,9 @@ app.use("/uploads", express.static("uploads"));
 // app.use(express.static(path.join(__dirname, "public")));
 // Attach main router for /api routes
 app.use("/api/v1", mainRouter);
+const __dirname = url.fileURLToPath(new URL(".", import.meta.url));
+
+app.use(express.static(path.join(__dirname, "../public")));
 const start = async () => {
   await mongoose.connect(process.env.MONGO_URI);
 

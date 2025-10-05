@@ -2,3 +2,26 @@
 section[data-css="sidebar-footer"] {
   display: none !important;
 }
+
+/* Add borders to list tables */
+.adminjs_Table {
+  border-collapse: collapse !important;
+  width: 100% !important;
+}
+
+.adminjs_Table th,
+.adminjs_Table thead,
+.adminjs_Table td {
+  border: 1px solid #ccc !important;
+  padding: 8px !important;
+}
+.adminjs_Table th {
+  background-color: #f4f4f4 !important;
+}
+/* .adminjs_Table td {
+  border: 1px solid #ccc !important;
+} */
+
+thead tr {
+  background-color: #e8f5e9 !important;
+}

@@ -512,7 +512,7 @@ const adminOptions = {
     logo: "https://homeaurarealtor.com/assets/img/logo157.png",
   },
   assets: {
-    styles: ["./admin.css"], // 👈 Make sure this path matches your setup
+    styles: ["/admin.css"], // 👈 Make sure this path matches your setup
   },
   dashboard: {
     component: Components.Dashboard,
