@@ -251,6 +251,14 @@ const adminOptions = {
           direction: "desc",
         },
         actions: {
+          exportLeads: {
+            actionType: "resource",
+            icon: "Download",
+            label: "Export to Excel",
+            showInDrawer: true,
+            component: Components.ExportExcelDownload, // frontend component will be added later
+            isVisible: true,
+          },
           edit: {
             isAccessible: ({ currentAdmin }) => !!currentAdmin, // everyone logged-in can see edit
             before: async (request, context) => {
@@ -349,6 +357,14 @@ const adminOptions = {
           direction: "desc",
         },
         actions: {
+          exportLeads: {
+            actionType: "resource",
+            icon: "Download",
+            label: "Export to Excel",
+            showInDrawer: true,
+            component: Components.ExportExcelDownload, // frontend component will be added later
+            isVisible: true,
+          },
           // edit: {
           //   isAccessible: ({ currentAdmin }) => onlyAdmin(currentAdmin), // only admin can do
           // },
@@ -417,6 +433,14 @@ const adminOptions = {
           direction: "desc",
         },
         actions: {
+          exportLeads: {
+            actionType: "resource",
+            icon: "Download",
+            label: "Export to Excel",
+            showInDrawer: true,
+            component: Components.ExportExcelDownload, // frontend component will be added later
+            isVisible: true,
+          },
           // edit: {
           //   isAccessible: ({ currentAdmin }) => onlyAdmin(currentAdmin), // only admin can do
           // },
