@@ -375,7 +375,7 @@ const adminOptions = {
           name: "CRM Data", // 👈 Custom group name shown in sidebar
           icon: "User", // 👈 Optional icon from AdminJS icons
         },
-        listProperties: ["name", "email", "phone", "status", "budget"],
+        listProperties: ["name", "email", "phone", "status", "budget", "flat"],
         editProperties: [
           "name",
           "email",
@@ -386,6 +386,7 @@ const adminOptions = {
           "notes",
           "location",
           "availability",
+          "flat",
         ],
         filterProperties: [
           "name",
@@ -394,6 +395,7 @@ const adminOptions = {
           "status",
           "location",
           "tenantType",
+          "flat",
         ],
         showProperties: [
           "name",
@@ -408,6 +410,7 @@ const adminOptions = {
           "availability",
           "createdAt",
           "updatedAt",
+          "flat",
         ],
         sort: {
           sortBy: "createdAt",

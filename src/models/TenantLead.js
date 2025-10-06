@@ -116,6 +116,22 @@ const TenantLeadSchema = new mongoose.Schema(
     }, // Status of the contact mail
     notes: { type: String },
     // project: { type: String },
+    flat: {
+      type: String,
+      enum: [
+        "1RK",
+        "1BHK",
+        "2BHK",
+        "3BHK",
+        "4BHK",
+        "5BHK",
+        "Independent House",
+        "Studio Apartment",
+        "PG/Hostel",
+        "Not Provided",
+      ],
+      default: "Not Provided",
+    }, // Flat type
     status: {
       type: String,
       enum: [
@@ -123,11 +139,16 @@ const TenantLeadSchema = new mongoose.Schema(
         "Contacted / Attempted to Contact",
         "Interested / Warm Lead",
         "Not Interested",
+        "No Response",
+        "Call scheduled",
         "Follow-Up Scheduled",
+        "Follow through",
+        "Follow back",
         "Site Visit Scheduled / Done",
         "Negotiation / Booking in Progress",
         "Closed - Won",
         "Closed - Lost",
+        "Other",
       ],
       default: "New / Fresh Lead",
     },
