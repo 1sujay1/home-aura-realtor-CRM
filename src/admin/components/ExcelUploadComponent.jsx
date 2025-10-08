@@ -11,7 +11,10 @@ import {
   Badge,
 } from "@adminjs/design-system";
 
-const ExcelUploadComponent = () => {
+const ExcelUploadComponent = (props) => {
+  console.log("📦 ExportExcelUpload props:", props);
+  const resourceId = props?.resource?.id;
+  console.log("📦 ExportExcelUpload resourceId:", resourceId);
   const [file, setFile] = useState(null);
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
@@ -35,10 +38,13 @@ const ExcelUploadComponent = () => {
 
     setLoading(true);
     try {
-      const res = await fetch("/admin-actions/import-leads", {
-        method: "POST",
-        body: formData,
-      });
+      const res = await fetch(
+        `/admin-actions/import-leads?resourceId=${resourceId}`,
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
       const result = await res.json();
 
       if (result.success) {

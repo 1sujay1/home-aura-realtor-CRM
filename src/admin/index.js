@@ -252,6 +252,13 @@ const adminOptions = {
           direction: "desc",
         },
         actions: {
+          importExcel: {
+            label: "Import from Excel",
+            icon: "Upload",
+            actionType: "resource",
+            component: Components.ExcelUploadComponent,
+            isVisible: true,
+          },
           exportLeads: {
             actionType: "resource",
             icon: "Download",
@@ -324,8 +331,8 @@ const adminOptions = {
           "status",
         ],
         editProperties: [
-          "ownerName",
-          "ownerPhone",
+          "name",
+          "phone",
           "flat",
           "rent",
           "advance",
@@ -338,8 +345,8 @@ const adminOptions = {
         ],
         filterProperties: ["flat", "location", "rent", "status"],
         showProperties: [
-          "ownerName",
-          "ownerPhone",
+          "name",
+          "phone",
           "flat",
           "rent",
           "advance",
@@ -358,6 +365,13 @@ const adminOptions = {
           direction: "desc",
         },
         actions: {
+          importExcel: {
+            label: "Import from Excel",
+            icon: "Upload",
+            actionType: "resource",
+            component: Components.ExcelUploadComponent,
+            isVisible: true,
+          },
           exportLeads: {
             actionType: "resource",
             icon: "Download",
@@ -434,6 +448,13 @@ const adminOptions = {
           direction: "desc",
         },
         actions: {
+          importExcel: {
+            label: "Import from Excel",
+            icon: "Upload",
+            actionType: "resource",
+            component: Components.ExcelUploadComponent,
+            isVisible: true,
+          },
           exportLeads: {
             actionType: "resource",
             icon: "Download",

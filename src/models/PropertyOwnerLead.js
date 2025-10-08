@@ -3,8 +3,9 @@ import mongoose from "mongoose";
 
 const PropertyOwnerLeadSchema = new mongoose.Schema(
   {
-    ownerName: String,
-    ownerPhone: String,
+    name: String,
+    phone: String,
+    email: String,
     parking: {
       type: String,
       enum: ["No Parking", "1 Car", "2 Car", "3+ Car", "Bike Only", "Visitor"],

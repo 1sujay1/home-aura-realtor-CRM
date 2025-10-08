@@ -35,8 +35,9 @@ const resourceMappings = {
   }),
 
   "Property-Owners": (r) => ({
-    "Owner Name": r.params.ownerName,
-    "Owner Phone": r.params.ownerPhone,
+    Name: r.params.name,
+    Phone: r.params.phone,
+    Email: r.params.email,
     Parking: r.params.parking,
     Security: r.params.security,
     Flat: r.params.flat,
