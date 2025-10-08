@@ -35,6 +35,7 @@ const Components = {
 };
 
 AdminJS.registerAdapter(AdminJSMongoose);
+
 const adminEmail = "admin@gmail.com";
 const onlyAdmin = (currentAdmin) => currentAdmin?.email === adminEmail;
 const dashboardHandler = async (req, res, context) => {
@@ -57,7 +58,7 @@ const adminOptions = {
       options: {
         id: "Leads",
         navigation: {
-          name: "CRM Data", // 👈 Custom group name shown in sidebar
+          name: "All Leads", // 👈 Custom group name shown in sidebar
           icon: "User", // 👈 Optional icon from AdminJS icons
         },
         properties: {
@@ -181,7 +182,7 @@ const adminOptions = {
       options: {
         id: "Client-Leads",
         navigation: {
-          name: "CRM Data", // 👈 Custom group name shown in sidebar
+          name: "All Leads", // 👈 Custom group name shown in sidebar
           icon: "User", // 👈 Optional icon from AdminJS icons
         },
         properties: {
@@ -310,7 +311,7 @@ const adminOptions = {
       options: {
         id: "Property-Owners",
         navigation: {
-          name: "CRM Data", // 👈 Custom group name shown in sidebar
+          name: "All Leads", // 👈 Custom group name shown in sidebar
           icon: "User", // 👈 Optional icon from AdminJS icons
         },
         listProperties: [
@@ -388,7 +389,7 @@ const adminOptions = {
       options: {
         id: "Tenant-Leads",
         navigation: {
-          name: "CRM Data", // 👈 Custom group name shown in sidebar
+          name: "All Leads", // 👈 Custom group name shown in sidebar
           icon: "User", // 👈 Optional icon from AdminJS icons
         },
         listProperties: ["name", "email", "phone", "status", "budget", "flat"],
@@ -465,7 +466,7 @@ const adminOptions = {
         id: "Expense-Entries",
         navigation: {
           name: "Admin Section", // 👈 Custom group name shown in sidebar
-          icon: "User", // 👈 Optional icon from AdminJS icons
+          icon: "Settings", // 👈 Optional icon from AdminJS icons
         },
         listProperties: [
           "category",
@@ -534,12 +535,14 @@ const adminOptions = {
   ],
   rootPath: "/admin",
   branding: {
-    companyName: "RealEstate CRM",
+    companyName: "Home Aura Realtor - CRM",
     softwareBrothers: false,
     logo: "https://homeaurarealtor.com/assets/img/logo157.png",
+    favicon: "https://homeaurarealtor.com/assets/img/favicon.png",
   },
   assets: {
     styles: ["/admin.css"], // 👈 Make sure this path matches your setup
+    scripts: ["/admin.js"],
   },
   dashboard: {
     component: Components.Dashboard,
