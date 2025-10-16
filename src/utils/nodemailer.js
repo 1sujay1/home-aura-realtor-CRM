@@ -50,6 +50,16 @@ const Clients = {
     receiverEmail: process.env.HOME_AURA_REALTOR_RECEIVER_EMAIL,
     displayEmail: "projects@homeaurarealtor.com",
   },
+  URBANRISE_PARADISE_ON_EARTH: {
+    name: "Urbanrise Paradise on Earth",
+    user: process.env.HOME_AURA_REALTOR_NODE_MAILER_EMAIL,
+    pass: process.env.HOME_AURA_REALTOR_NODE_MAILER_PASSWORD,
+    ccMail: process.env.HOME_AURA_REALTOR_CC_EMAILS
+      ? JSON.parse(process.env.HOME_AURA_REALTOR_CC_EMAILS)
+      : [],
+    receiverEmail: process.env.HOME_AURA_REALTOR_RECEIVER_EMAIL,
+    displayEmail: "projects@homeaurarealtor.com",
+  },
   ABHEE_CODENAME_YOU: {
     name: "Abhee Codename You",
     user: process.env.HOME_AURA_REALTOR_NODE_MAILER_EMAIL,
