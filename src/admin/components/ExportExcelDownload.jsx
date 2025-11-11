@@ -65,6 +65,19 @@ const resourceMappings = {
     Status: r.params.status,
     "Created At": r.params.createdAt?.split("T")[0],
   }),
+
+  "Expense-Entries": (r) => ({
+    Category: r.params.category,
+    Description: r.params.description,
+    Amount: r.params.amount,
+    Date: r.params.date,
+    "Payment Mode": r.params.paymentMode,
+    "Payment Made By": r.params.paymentMadeBy,
+    "Expense Type": r.params.expenseType,
+    Notes: r.params.notes,
+    Status: r.params.status,
+    "Created At": r.params.createdAt?.split("T")[0],
+  }),
 };
 const ExportExcelDownload = (props) => {
   console.log("📦 ExportExcelDownload props:", props);
