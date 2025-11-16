@@ -100,6 +100,36 @@ const Clients = {
     receiverEmail: process.env.HOME_AURA_REALTOR_RECEIVER_EMAIL,
     displayEmail: "projects@providentsunworthcity.com",
   },
+  PURAVANKARA_CODENAME_BLISS: {
+    name: "Puravankara Codename Bliss",
+    user: process.env.HOME_AURA_REALTOR_NODE_MAILER_EMAIL,
+    pass: process.env.HOME_AURA_REALTOR_NODE_MAILER_PASSWORD,
+    ccMail: process.env.HOME_AURA_REALTOR_CC_EMAILS
+      ? JSON.parse(process.env.HOME_AURA_REALTOR_CC_EMAILS)
+      : [],
+    receiverEmail: process.env.HOME_AURA_REALTOR_RECEIVER_EMAIL,
+    displayEmail: "projects@puravankaracodenamebliss.com",
+  },
+  PURVA_ATMOSPHERE: {
+    name: "Purva Atmosphere",
+    user: process.env.HOME_AURA_REALTOR_NODE_MAILER_EMAIL,
+    pass: process.env.HOME_AURA_REALTOR_NODE_MAILER_PASSWORD,
+    ccMail: process.env.HOME_AURA_REALTOR_CC_EMAILS
+      ? JSON.parse(process.env.HOME_AURA_REALTOR_CC_EMAILS)
+      : [],
+    receiverEmail: process.env.HOME_AURA_REALTOR_RECEIVER_EMAIL,
+    displayEmail: "projects@puravankaracodenamebliss.com",
+  },
+  PROVIDENT_DEANSGATE: {
+    name: "Provident Deansgate",
+    user: process.env.HOME_AURA_REALTOR_NODE_MAILER_EMAIL,
+    pass: process.env.HOME_AURA_REALTOR_NODE_MAILER_PASSWORD,
+    ccMail: process.env.HOME_AURA_REALTOR_CC_EMAILS
+      ? JSON.parse(process.env.HOME_AURA_REALTOR_CC_EMAILS)
+      : [],
+    receiverEmail: process.env.HOME_AURA_REALTOR_RECEIVER_EMAIL,
+    displayEmail: "projects@puravankaracodenamebliss.com",
+  },
   SATTVA_SIMPLICITY: {
     name: "Sattva Simplicity",
     user: process.env.HOME_AURA_REALTOR_NODE_MAILER_EMAIL,
