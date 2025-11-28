@@ -110,6 +110,36 @@ const Clients = {
     receiverEmail: process.env.HOME_AURA_REALTOR_RECEIVER_EMAIL,
     displayEmail: "projects@puravankaracodenamebliss.com",
   },
+  GODREJ_HOMES_PROJECT: {
+    name: "Godrej Homes Project",
+    user: process.env.HOME_AURA_REALTOR_NODE_MAILER_EMAIL,
+    pass: process.env.HOME_AURA_REALTOR_NODE_MAILER_PASSWORD,
+    ccMail: process.env.HOME_AURA_REALTOR_CC_EMAILS
+      ? JSON.parse(process.env.HOME_AURA_REALTOR_CC_EMAILS)
+      : [],
+    receiverEmail: process.env.HOME_AURA_REALTOR_RECEIVER_EMAIL,
+    displayEmail: "projects@godrejhomesproject.com",
+  },
+  ASSETZ_PROJECT: {
+    name: "Assetz Project",
+    user: process.env.HOME_AURA_REALTOR_NODE_MAILER_EMAIL,
+    pass: process.env.HOME_AURA_REALTOR_NODE_MAILER_PASSWORD,
+    ccMail: process.env.HOME_AURA_REALTOR_CC_EMAILS
+      ? JSON.parse(process.env.HOME_AURA_REALTOR_CC_EMAILS)
+      : [],
+    receiverEmail: process.env.HOME_AURA_REALTOR_RECEIVER_EMAIL,
+    displayEmail: "projects@assetzproject.com",
+  },
+  ABHEE_PROPERTIES: {
+    name: "Abhee Properties",
+    user: process.env.HOME_AURA_REALTOR_NODE_MAILER_EMAIL,
+    pass: process.env.HOME_AURA_REALTOR_NODE_MAILER_PASSWORD,
+    ccMail: process.env.HOME_AURA_REALTOR_CC_EMAILS
+      ? JSON.parse(process.env.HOME_AURA_REALTOR_CC_EMAILS)
+      : [],
+    receiverEmail: process.env.HOME_AURA_REALTOR_RECEIVER_EMAIL,
+    displayEmail: "projects@abheecodenameyou.com",
+  },
   PURAVANKARA_CODENAME_BLISS: {
     name: "Puravankara Codename Bliss",
     user: process.env.HOME_AURA_REALTOR_NODE_MAILER_EMAIL,
