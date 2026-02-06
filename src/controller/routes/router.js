@@ -7,6 +7,7 @@ import {
 import ClientLead from "../../models/ClientLeads.js";
 import { fetchLead } from "../../utils/fetchLead.js";
 import { FORM_DATA } from "../../utils/constants.js";
+import { sendKyraContactMail } from "../../utils/kyraNodemailer.js";
 
 const router = express.Router();
 
@@ -67,6 +68,7 @@ router.post("/contact", async (req, res) => {
   }
 });
 router.post("/client/contact", async (req, res) => {
+  console.log("Client Contact Req Body:", req.body);
   const { name, email, message, phone, source, project, secondaryPhone } =
     req.body;
 
@@ -212,12 +214,12 @@ router.post("/webhook", async (req, res) => {
                     message: "Lead from Facebook",
                     secondaryPhone: "",
                   }),
-                }
+                },
               );
 
               console.log(
                 "✅ Lead saved and email triggered",
-                contactFormData.json()
+                contactFormData.json(),
               );
             } catch (err) {
               console.error("Error fetching or saving lead:", err);
@@ -238,5 +240,38 @@ router.post("/webhook", async (req, res) => {
 //   );
 //   return await response.json();
 // }
+
+router.post("/kyra/contact", async (req, res) => {
+  console.log("Client Contact Req Body:", req.body);
+  const { name, email, message, phone, source, project, secondaryPhone } =
+    req.body;
+
+  if (!name || !phone)
+    return res.status(400).json({ message: "All fields required" });
+
+  let mailStatus = "success";
+
+  try {
+    await sendKyraContactMail({
+      name,
+      email,
+      message: message || "",
+      phone,
+      project,
+      secondaryPhone,
+    });
+    return res.status(200).json({
+      status: 200,
+      message: "Thank you for contacting us. We will get back to you soon.",
+    });
+  } catch (error) {
+    console.error("Error sending mail:", error);
+    mailStatus = "failed";
+    return res.json({
+      status: 500,
+      message: "Failed to Submit, Please try again later.",
+    });
+  }
+});
 
 export default router;
