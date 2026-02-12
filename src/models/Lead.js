@@ -9,7 +9,14 @@ const LeadSchema = new mongoose.Schema(
     secondaryPhone: String,
     source: {
       type: String,
-      enum: ["CRM", "FACEBOOK", "INSTAGRAM", "WHATSAPP", "OTHER"],
+      enum: [
+        "CRM",
+        "FACEBOOK",
+        "INSTAGRAM",
+        "WHATSAPP",
+        "OTHER",
+        "HOME_AURA_REALTOR",
+      ],
       default: "CRM",
     }, // Default source
     mailStatus: {
