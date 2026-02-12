@@ -9,7 +9,7 @@ const LeadSchema = new mongoose.Schema(
     secondaryPhone: String,
     source: {
       type: String,
-      enum: ["CRM", "HOME_AURA_REALTOR"],
+      enum: ["CRM", "FACEBOOK", "INSTAGRAM", "WHATSAPP", "OTHER"],
       default: "CRM",
     }, // Default source
     mailStatus: {
@@ -27,14 +27,11 @@ const LeadSchema = new mongoose.Schema(
         "Interested / Warm Lead",
         "Not Interested",
         "No Response",
-        "Call scheduled",
         "Follow-Up Scheduled",
-        "Follow through",
-        "Follow back",
-        "Site Visit Scheduled / Done",
-        "Negotiation / Booking in Progress",
-        "Closed - Won",
-        "Closed - Lost",
+        "Site Visit Scheduled",
+        "Booking in Progress",
+        "Deal Success ",
+        "Deal Lost",
         "Other",
       ],
       default: "New / Fresh Lead",
@@ -42,7 +39,7 @@ const LeadSchema = new mongoose.Schema(
     notes: { type: String },
     visitDate: { type: Date },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 const Lead = mongoose.model("Lead", LeadSchema);
