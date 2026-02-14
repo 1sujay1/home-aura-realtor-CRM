@@ -51,7 +51,7 @@ router.post("/contact", async (req, res) => {
       mailStatus,
       secondaryPhone,
       project: project || "HOME_AURA_REALTOR",
-      source: "HOME_AURA_REALTOR",
+      source: source || "HOME_AURA_REALTOR",
     });
     if (leadResp._id) {
       return res.status(200).json({
