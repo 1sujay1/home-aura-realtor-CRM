@@ -17,15 +17,18 @@ router.get("/ping", (req, res) => {
 });
 
 router.post("/contact", async (req, res) => {
-  const { name, email, message, phone, project, secondaryPhone } = req.body;
+  const { name, email, message, source, phone, project, secondaryPhone } =
+    req.body;
 
   if (!name || !phone)
     return res.status(400).json({ message: "All fields required" });
 
   let mailStatus = "success";
-
+  let postPayload = { name, email, message, phone, secondaryPhone };
+  if (source) postPayload.source = source;
+  if (project) postPayload.project = project;
   try {
-    await sendContactMail({ name, email, message, phone, secondaryPhone });
+    await sendContactMail(postPayload);
   } catch (error) {
     console.error("Error sending mail:", error);
     mailStatus = "failed";
