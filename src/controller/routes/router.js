@@ -19,7 +19,7 @@ router.get("/ping", (req, res) => {
 router.post("/contact", async (req, res) => {
   const { name, email, message, source, phone, project, secondaryPhone } =
     req.body;
-
+  console.log("Contact Req Body:", req.body);
   if (!name || !phone)
     return res.status(400).json({ message: "All fields required" });
 
@@ -27,6 +27,7 @@ router.post("/contact", async (req, res) => {
   let postPayload = { name, email, message, phone, secondaryPhone };
   if (source) postPayload.source = source;
   if (project) postPayload.project = project;
+  console.log("Contact form payload:", postPayload);
   try {
     await sendContactMail(postPayload);
   } catch (error) {
