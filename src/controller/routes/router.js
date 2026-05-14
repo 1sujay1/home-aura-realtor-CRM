@@ -132,7 +132,7 @@ router.post("/client/contact", async (req, res) => {
   }
 });
 
-router.post("/clients/contact", async (req, res) => {
+router.post("/client/mail/contact", async (req, res) => {
   console.log("Client Contact Req Body:", req.body);
   const { name, email, message, phone, source, project, secondaryPhone } =
     req.body;
@@ -143,7 +143,7 @@ router.post("/clients/contact", async (req, res) => {
   let mailStatus = "success";
 
   try {
-    await sendClientContactMail({
+    const resp = await sendClientContactMail({
       name,
       email,
       message: message || "",
@@ -151,9 +151,25 @@ router.post("/clients/contact", async (req, res) => {
       project,
       secondaryPhone,
     });
+    console.log("resp", resp.messageId);
+    if (resp.messageId) {
+      return res.status(200).json({
+        status: 200,
+        message: "Thank you for contacting us. We will get back to you soon.",
+      });
+    } else {
+      return res.json({
+        status: 500,
+        message: "Failed to Submit, Please try again later.",
+      });
+    }
   } catch (error) {
     console.error("Error sending mail:", error);
     mailStatus = "failed";
+    return res.json({
+      status: 500,
+      message: "Server Error, Please try again later.",
+    });
   }
 
   //   if (mailStatus === "success") {
@@ -163,34 +179,34 @@ router.post("/clients/contact", async (req, res) => {
   //   }
 
   // Save lead regardless of mail success/failure
-  try {
-    const leadResp = await Lead.create({
-      name,
-      email,
-      phone,
-      message: message || "",
-      mailStatus,
-      secondaryPhone,
-      source: source || "PORTAL",
-      project,
-    });
-    if (leadResp._id) {
-      return res.status(200).json({
-        status: 200,
-        message: "Thank you for contacting us. We will get back to you soon.",
-      });
-    }
-    return res.json({
-      status: 500,
-      message: "Failed to Submit, Please try again later.",
-    });
-  } catch (dbErr) {
-    console.error("Failed to save lead:", dbErr);
-    return res.json({
-      status: 500,
-      message: "Failed to Submit, Please try again later.",
-    });
-  }
+  // try {
+  //   const leadResp = await Lead.create({
+  //     name,
+  //     email,
+  //     phone,
+  //     message: message || "",
+  //     mailStatus,
+  //     secondaryPhone,
+  //     source: source || "PORTAL",
+  //     project,
+  //   });
+  //   if (leadResp._id) {
+  //     return res.status(200).json({
+  //       status: 200,
+  //       message: "Thank you for contacting us. We will get back to you soon.",
+  //     });
+  //   }
+  //   return res.json({
+  //     status: 500,
+  //     message: "Failed to Submit, Please try again later.",
+  //   });
+  // } catch (dbErr) {
+  //   console.error("Failed to save lead:", dbErr);
+  //   return res.json({
+  //     status: 500,
+  //     message: "Failed to Submit, Please try again later.",
+  //   });
+  // }
 });
 
 const VERIFY_TOKEN = "fb_leads_secret"; // use the same in FB webhook setup
