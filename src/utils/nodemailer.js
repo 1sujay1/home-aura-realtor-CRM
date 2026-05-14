@@ -190,6 +190,16 @@ const Clients = {
     receiverEmail: process.env.SATTVA_VASANTA_RECEIVER_EMAIL,
     displayEmail: "projects@sattva-vasantaskye.com",
   },
+  SENCIA_PLOTS: {
+    name: "Sencia Plots",
+    user: process.env.SATTVA_VASANTA_NODE_MAILER_EMAIL,
+    pass: process.env.SATTVA_VASANTA_NODE_MAILER_PASSWORD,
+    ccMail: process.env.SATTVA_VASANTA_CC_EMAILS
+      ? JSON.parse(process.env.SATTVA_VASANTA_CC_EMAILS)
+      : [],
+    receiverEmail: process.env.SATTVA_VASANTA_RECEIVER_EMAIL,
+    displayEmail: "projects@sattva-vasantaskye.com",
+  },
 };
 function escapeHtml(str) {
   if (!str) return "";
@@ -219,6 +229,11 @@ export const sendClientContactMail = async ({
   let currentClient = Clients[project];
   if (!currentClient) {
     currentClient = Clients["HOME_AURA_REALTOR"];
+
+    if (project) {
+      const projectName = project.split("_").join(" ");
+      currentClient.name = projectName;
+    }
   }
   const transporter = nodemailer.createTransport({
     service: "gmail", // or configure host/port manually
